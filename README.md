@@ -10,9 +10,9 @@
 ```shell
 npm init -y
 npm install tailwindcss
+npm install --save-dev live-server
 # Add components into src/styles.css and execute tailwind build command to create css file in public directory.
 npm run build
-
 ```
 
 ## Colors
@@ -96,3 +96,108 @@ npm run build
 - `lowercase`
 - `capitalize` capitalize text
 - `normal-case` normal text
+
+## Border
+
+- `rounded` make slightly rounded border
+- `rounded-sm`: less rounded
+- `rounded-md`: medium rounded
+- `rounded-lg`: large round
+- `rounded-xl`
+- `rounded-2xl`
+- `rounded-full`: make button more like a circular on both left and right
+- `rounded-t-md`: make top side rounded only
+- `rounded-b-md`: make bottom side rounded only
+- `rounded-l-md`: make left side rounded only
+- `rounded-r-md`: make right side rounded only
+
+- `border-4`: make border 4px
+- `border-0`: no border
+- `border-8`: border 8px on all sides
+- `border-r-8`: only right side border of 8px
+- `border-t-8`: top border 8px only
+- `border-b-8`
+- `border-l-8`: only set left side border of 8px
+
+- `border-red-200`: set red color border
+- `border-blue-800`: darker blue border
+- `border-opacity-100`: make border appear cleanly
+- `border-opacity-0`: make border invisible
+- `border-opacity-50`: make border slighly visible
+
+- `border-dashed`: make dashed border
+- `border-dotted`: make border dotted
+- `border-double`: make double border around element
+
+- `shadow`: add shadow on all sides
+- `shadow-xl`: make extra large shadow
+- `shadow-none`: no shadow
+- `shadow-inner`: set shadow inside element
+
+## Breakpoints
+- `2xl:text-pink-500`: set text color to pink for 2 extra large devices. The default device sizes are defined in [this doc](https://tailwindcss.com/docs/responsive-design#using-custom-breakpoints).
+- `xl:text-yellow-500`: set text color yellow for extra large devices.
+Similarly other properties can also be customized based on device sizes.
+
+## Pseudo Selectors
+Change behavior based on mouse or user actions using pseudo selector
+- `hover:bg-blue-400`: change color when user hovers over to blue color
+- `hover:text-white`: change also color of text to white
+- `focus:bg-white-500` on focus, change background color to white
+- `group`: applied to parent element
+- `group-hover:text-white`: applied to child element. When parent is hovered, it will change the style of child element to which this class is applied.
+
+## Directives
+`@tailwind` is the directive and the `base` directive have all simple styles. To changes default styles, we change the layers in `src/styles.css` file rather than `public/styles.css` file. For example, to alter elements of `base` class, we use `@layer` like below.
+
+```css
+@layer base {
+    a {
+        @apply text-green-500;
+    }
+}
+```
+
+This will require rebuild of the code so that new styling gets applied.
+
+## Components
+
+If we have to have same styling to two buttons for example, we have to repeat same code except button text. In such cases, to avoid repeatitions, we can define component using `@layer`.
+
+```css
+@layer components {
+    .menu-button {
+        @apply text-white bg-indigo-500 p-3;
+    }
+}
+```
+
+Then rebuild the project and then inside the HTML file, we could use  
+
+```html
+<button class="menu-button">click</button>
+```
+
+## Extra Utilities class
+Change utilities classes using layer and change default behavior of the available class.
+
+```css
+@layer utilities {
+    .text-green-500 {
+        color: blue;
+    }
+}
+```
+
+When we use the `@apply` directive, we 
+
+```css
+.menu-button{
+    @apply text-white bg-green rounded;
+}
+```
+
+When we rebuild, we get some new CSS generated even if we have removed available layers. Next time, when we create a button with available `menu-button` class, all the styles get applied.
+Similarly, `@layer` is applied to change the contents of available classes. For that we use `@layer` to access available class and then we use specific element and `@apply` our defined classes to change the behavior.
+To create components, we have to access `components` layer using `@layer components`. Similarly, utility classes such as `bg-green-500` can be modified using `@layer utilities` and change the behavior of utilities class.
+
