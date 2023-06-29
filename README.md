@@ -11,6 +11,7 @@
 npm init -y
 npm install tailwindcss
 npm install --save-dev live-server
+mkdir src;
 # Add components into src/styles.css and execute tailwind build command to create css file in public directory.
 npm run build
 ```

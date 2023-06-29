@@ -1,0 +1,20 @@
+{
+  "name": "properties-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwind build src/styles.css -o public/styles.css && npm run dev",
+    "dev": "live-server public/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.3.2"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
